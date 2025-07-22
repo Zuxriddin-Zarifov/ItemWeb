@@ -4,3 +4,34 @@
 # https://aka.ms/yaml
 
 
+trigger:
+-none
+
+variables:
+    IISWebsiteName: 'item'
+
+resources:
+    pipelines:
+        - pipeline: 'ItemsZuhriddin'
+          project: 'ItemsZuhriddin'
+          source: 'Build pipeline'
+          branch: 'main'
+
+stages:
+    - stage: DeployWebsite
+      displayName: 'Deploy Website'
+      pool:
+        vmImage: windows-latest
+
+      jobs:
+          - deployment: DeployWebsite
+            displayName: 'Deploy Website'
+            environment: 'ZuhriddinWindowsServer.EC2AMAZ-U4VNF12'
+            strategy:
+             runOnce:
+                  deploy:
+                      steps:
+                          - checkout: none
+
+                          - download: 'ItemZuhriddin'
+                          
