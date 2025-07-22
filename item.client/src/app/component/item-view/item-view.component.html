@@ -1,0 +1,94 @@
+<div class="container mt-4 " style="font-size: 0.8rem;">
+    <div class="mx-auto " style="max-width: 900px;">
+        <div class="card shadow rounded p-4 bg-white">
+            <div class="row fw-bold border-bottom pb-2 mb-3 text-center">
+                <div class="col">
+                    <button class="btn btn-link text-decoration-none text-dark" (click)="sort('ItemId')">
+                        Id
+                        <span *ngIf="orderBy === 'ItemId'">
+                            {{ isAscending === true ? '▲' : '▼' }}
+                        </span>
+                    </button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-link text-decoration-none text-dark" (click)="sort('Name')">
+                        Name
+                        <span *ngIf="orderBy === 'Name'">
+                            {{ isAscending === true ? '▲' : '▼' }}
+                        </span>
+                    </button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-link text-decoration-none text-dark" (click)="sort('Type')">
+                        Type
+                        <span *ngIf="orderBy === 'Type'">
+                            {{ isAscending === true ? '▲' : '▼' }}
+                        </span>
+                    </button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-link text-decoration-none text-dark" (click)="sort('Date')">
+                        Date
+                        <span *ngIf="orderBy === 'Date'">
+                            {{ isAscending === true ? '▲' : '▼' }}
+                        </span>
+                    </button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-link text-decoration-none text-dark me-3">Actions</button>
+                    <button (click)="addItem()" class="btn btn-sm btn-outline-primary me-2" type="button">Add</button>
+                </div>
+            </div>
+
+            <div class="row align-items-center mb-2" *ngFor="let item of Items">
+                <div class="col text-center">{{ item.id }}</div>
+                <div class="col text-center">{{ item.name }}</div>
+                <div class="col text-center">{{ item.type }}</div>
+                <div class="col text-center">
+                    {{ item.date.getDate() }}.{{ item.date.getMonth() + 1 < 10 ? 0 : "" }}{{ item.date.getMonth() + 1
+                        }}.{{ item.date.getFullYear() }} </div>
+                        <div class="col  text-center">
+                            <button (click)="editItem(item.id)" class="btn btn-sm btn-outline-warning text-dark me-1"
+                                type="button">Edit</button>
+                            <button (click)="confirmDelete(item.id)" class="btn btn-sm btn-outline-danger"
+                                type="button">Delete</button>
+                        </div>
+                </div>
+
+                <div class="d-flex justify-content-center pt-3">
+                    <div class="d-flex justify-content-start align-items-center pt-3 flex-wrap">
+                        <label class="form-label me-2 fs-5 me-2">
+                            Total: {{ TotalItems }}
+                        </label>
+
+                        <select class="form-select form-select-sm w-auto me-2" [value]="PageSize"
+                            (change)="onPageSizeChange($event)">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+
+                        <button *ngIf="TotalPages > 10" (click)="current()" class="btn btn-sm btn-outline-primary me-2"
+                            type="button">Current</button>
+
+                        <button *ngIf="TotalPages > 10" (click)="next()" class="btn btn-sm btn-outline-primary me-2"
+                            type="button"> Next </button>
+
+                        <button *ngIf="TotalPages > 10" (click)="previous()" class="btn btn-sm btn-outline-primary me-2"
+                            type="button"> Previous </button>
+
+                        <div *ngIf="TotalItems > PageSize">
+                            <button (click)="page(i.valueOf())" *ngFor="let i of Pages"
+                                class="btn btn-sm btn-outline-primary me-2 " type="button">{{i.valueOf() }}</button>
+                        </div>
+
+
+                        <button *ngIf="TotalPages > 10" (click)="end()" class="btn btn-sm btn-outline-primary me-2"
+                            id="end" type="button">End</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

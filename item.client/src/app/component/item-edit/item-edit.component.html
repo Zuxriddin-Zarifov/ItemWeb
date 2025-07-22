@@ -1,0 +1,29 @@
+<div class="container mt-5" style="max-width: 400px; font-size: 0.8rem;">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title" style="font-size: 1rem;">Item</h5>
+      </div>
+      <div class="card-body">
+        <form>
+            <div class="mb-3">
+              <label class="form-label">ID</label>
+              <input type="text" class="form-control" id="id" value="{{ id }}" readonly>
+            </div>
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" class="form-control" id="name">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Type</label>
+            <input type="text" class="form-control" id="type">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Date</label>
+            <input type="date" class="form-control"  id="date">
+          </div>
+          <button (click)="saveItem()" type="button" class="btn btn-outline-primary w-100">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
